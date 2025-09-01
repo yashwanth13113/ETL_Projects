@@ -1,0 +1,17 @@
+import sqlite3
+
+
+conn = sqlite3.connect("etl_db.sqlite")
+cursor = conn.cursor()
+
+
+query = """
+SELECT customer, SUM(revenue) as total_revenue
+FROM etl_table
+GROUP BY customer;
+"""
+
+for row in cursor.execute(query):
+    print(row)
+
+conn.close()
